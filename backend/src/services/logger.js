@@ -1,4 +1,4 @@
-const prisma = require("../lib/prisma");
+const prisma = require("../config/db");
 
 /**
  * Persists one AI interaction into the `AILog` collection.

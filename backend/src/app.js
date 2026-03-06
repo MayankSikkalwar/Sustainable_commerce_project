@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const productRoutes = require("./routes/product.routes");
+
 const app = express();
 
 /**
@@ -33,6 +35,19 @@ app.use(
 );
 
 app.use(express.json());
+
+/**
+ * Route composition layer.
+ *
+ * `app.js` should act as the application assembly point:
+ * - global middleware is registered here,
+ * - feature routers are mounted here,
+ * - feature implementation details stay inside route/controller/service files.
+ *
+ * This keeps the Express entrypoint small and makes the system easier to grow
+ * as new SaaS modules are added.
+ */
+app.use("/api/products", productRoutes);
 
 app.get("/api/health", async (_request, response) => {
   response.json({

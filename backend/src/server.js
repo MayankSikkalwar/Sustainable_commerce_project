@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = require("./app");
-const prisma = require("./lib/prisma");
+const prisma = require("./config/db");
 
 const PORT = Number(process.env.PORT || 5000);
 
