@@ -1,0 +1,45 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String
+  description           String
+  primaryCategory       String?
+  subCategory           String?
+  seoTags               String[]
+  sustainabilityFilters String[]
+  price                 Float    @default(0.0)
+  cost                  Float    @default(0.0)
+  embedding             Float[]
+}
+
+model Proposal {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  clientName    String
+  budget        Float
+  productsMix   Json
+  totalCost     Float
+  impactSummary String
+}
+
+model Order {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  orderNumber String @unique
+  status      String
+  items       Json
+}
+
+model AILog {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  moduleName    String
+  promptPayload String
+  rawResponse   String
+  timestamp     DateTime @default(now())
+}
