@@ -38,4 +38,17 @@ async function apiClient(path, options = {}) {
 
 apiClient.baseURL = API_BASE_URL;
 
+/**
+ * Helper for JSON POST requests.
+ *
+ * This lets page components express intent with `apiClient.post(...)` instead
+ * of repeatedly rebuilding method, headers, and body serialization logic.
+ */
+apiClient.post = function post(path, payload) {
+  return apiClient(path, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+};
+
 export default apiClient;

@@ -1,4 +1,8 @@
 const express = require("express");
+const {
+  enrichProductData,
+  saveProduct,
+} = require("../controllers/product.controller");
 
 const router = express.Router();
 
@@ -11,7 +15,10 @@ const router = express.Router();
  * - This mirrors how scalable SaaS backends separate transport concerns from
  *   business logic and from infrastructure code such as Prisma and AI clients.
  *
- * Phase 3 will mount real product endpoints here.
+ * Phase 3 now mounts the product enrichment and persistence endpoints here so
+ * `app.js` stays focused on application assembly instead of feature details.
  */
+router.post("/enrich", enrichProductData);
+router.post("/save", saveProduct);
 
 module.exports = router;
