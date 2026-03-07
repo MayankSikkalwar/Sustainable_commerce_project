@@ -77,6 +77,7 @@ Return ONLY valid JSON with these keys:
 - impactPositioningSummary: warm persuasive paragraph
 
 Rules:
+- All monetary values, budgets, and costs are in Indian Rupees (INR). Ensure your calculations and JSON output reflect INR values.
 - Use only the provided retrieved products.
 - totalEstimatedCost must be less than or equal to the client budget.
 - Keep suggestedQuantity realistic for a B2B proposal.

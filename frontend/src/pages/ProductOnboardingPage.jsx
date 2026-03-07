@@ -138,7 +138,7 @@ function ProductOnboardingPage() {
 
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block space-y-2">
-                <span className="text-sm font-medium text-slate-200">Unit Price ($)</span>
+                <span className="text-sm font-medium text-slate-200">Unit Price (₹)</span>
                 <input
                   type="number"
                   min="0"
@@ -151,7 +151,7 @@ function ProductOnboardingPage() {
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm font-medium text-slate-200">Unit Cost ($)</span>
+                <span className="text-sm font-medium text-slate-200">Unit Cost (₹)</span>
                 <input
                   type="number"
                   min="0"

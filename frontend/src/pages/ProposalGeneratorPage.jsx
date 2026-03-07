@@ -10,6 +10,10 @@ import { useState } from "react";
 
 import apiClient from "../api/apiClient";
 
+function formatINR(value) {
+  return `₹${Number(value || 0).toFixed(2)}`;
+}
+
 /**
  * B2B proposal generation screen.
  *
@@ -22,6 +26,14 @@ import apiClient from "../api/apiClient";
  * The actual vector retrieval and LLM generation stay in the backend, which is
  * important for security, maintainability, and interview-friendly separation of
  * concerns.
+ *
+ * Print/PDF note:
+ * - This screen uses native CSS print styles plus `window.print()` instead of a
+ *   heavyweight PDF generation library.
+ * - That approach is often a strong pragmatic choice for admin portals because
+ *   browser print engines already know how to paginate tables and text content.
+ * - It keeps the feature dependency-free while still producing a professional
+ *   export for quotes and proposal handoffs.
  */
 function ProposalGeneratorPage() {
   const [clientName, setClientName] = useState("");
@@ -30,6 +42,10 @@ function ProposalGeneratorPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [proposalData, setProposalData] = useState(null);
+
+  function handleDownloadPdf() {
+    window.print();
+  }
 
   async function handleGenerateProposal() {
     if (!clientName.trim() || !clientNeeds.trim() || !budget) {
@@ -82,8 +98,8 @@ function ProposalGeneratorPage() {
   }
 
   return (
-    <section className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
-      <div className="space-y-8">
+    <section className="grid gap-8 print:block xl:grid-cols-[0.9fr_1.1fr]">
+      <div className="space-y-8 print:hidden">
         <div className="space-y-4">
           <p className="inline-flex rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-4 py-1 text-xs uppercase tracking-[0.28em] text-fuchsia-200">
             Module 2
@@ -97,7 +113,7 @@ function ProposalGeneratorPage() {
           </p>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 shadow-[0_30px_100px_-40px_rgba(217,70,239,0.45)] backdrop-blur">
+        <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 shadow-[0_30px_100px_-40px_rgba(217,70,239,0.45)] backdrop-blur print:hidden">
           <div className="mb-6 flex items-center gap-3">
             <div className="rounded-2xl bg-fuchsia-400/12 p-3 text-fuchsia-300">
               <FileStack className="h-5 w-5" />
@@ -133,7 +149,7 @@ function ProposalGeneratorPage() {
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Budget</span>
+              <span className="text-sm font-medium text-slate-200">Budget (₹)</span>
               <div className="relative">
                 <BadgeDollarSign className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-fuchsia-300" />
                 <input
@@ -168,11 +184,21 @@ function ProposalGeneratorPage() {
               {isSaving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               <span>{isSaving ? "Saving..." : "Save Proposal"}</span>
             </button>
+
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={!proposalData?.proposal}
+              className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/15 bg-white/5 px-5 py-3 font-medium text-slate-100 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <FileStack className="h-4 w-4" />
+              <span>Download as PDF 📄</span>
+            </button>
           </div>
         </div>
 
         {proposalData?.matchedProducts?.length ? (
-          <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur">
+          <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur print:hidden">
             <div className="mb-4 flex items-center gap-2 text-sm font-medium text-slate-200">
               <BrainCircuit className="h-4 w-4 text-fuchsia-300" />
               Top Vector Matches
@@ -186,7 +212,7 @@ function ProposalGeneratorPage() {
                   <div>
                     <p className="font-medium text-white">{product.name}</p>
                     <p className="text-sm text-slate-400">
-                      Cost ${product.cost.toFixed(2)} • Price ${product.price.toFixed(2)}
+                      Cost {formatINR(product.cost)} • Price {formatINR(product.price)}
                     </p>
                   </div>
                   <span className="rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-3 py-1 text-xs text-fuchsia-100">
@@ -199,13 +225,13 @@ function ProposalGeneratorPage() {
         ) : null}
       </div>
 
-      <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+      <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur print:rounded-none print:border-0 print:bg-white print:p-0 print:text-black print:shadow-none">
+        <div className="flex flex-wrap items-start justify-between gap-4 print:border-b print:border-slate-300 print:pb-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-fuchsia-200/80">Proposal Output</p>
-            <h2 className="mt-2 text-3xl font-semibold text-white">Invoice / Quote Preview</h2>
+            <p className="text-xs uppercase tracking-[0.2em] text-fuchsia-200/80 print:text-slate-500">Proposal Output</p>
+            <h2 className="mt-2 text-3xl font-semibold text-white print:text-black">Invoice / Quote Preview</h2>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-4 py-2 text-xs font-medium text-fuchsia-100">
+          <span className="inline-flex items-center gap-2 rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-4 py-2 text-xs font-medium text-fuchsia-100 print:border-slate-300 print:bg-white print:text-black">
             <BrainCircuit className="h-3.5 w-3.5" />
             Powered by Vector Search & RAG 🧠
           </span>
@@ -214,48 +240,51 @@ function ProposalGeneratorPage() {
         {proposalData?.proposal ? (
           <div className="mt-8 space-y-8">
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Client</p>
-                <p className="mt-2 text-lg font-semibold text-white">{clientName}</p>
+              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4 print:border-slate-300 print:bg-white">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-500">Client</p>
+                <p className="mt-2 text-lg font-semibold text-white print:text-black">{clientName}</p>
               </div>
-              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Budget</p>
-                <p className="mt-2 text-lg font-semibold text-white">${Number(budget).toFixed(2)}</p>
+              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4 print:border-slate-300 print:bg-white">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-500">Budget</p>
+                <p className="mt-2 text-lg font-semibold text-white print:text-black">{formatINR(budget)}</p>
               </div>
-              <div className="rounded-2xl border border-emerald-300/15 bg-emerald-400/10 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-emerald-100/80">Estimated Total</p>
-                <p className="mt-2 text-lg font-semibold text-emerald-100">
-                  ${Number(proposalData.proposal.totalEstimatedCost || 0).toFixed(2)}
+              <div className="rounded-2xl border border-emerald-300/15 bg-emerald-400/10 p-4 print:border-slate-300 print:bg-white">
+                <p className="text-xs uppercase tracking-[0.18em] text-emerald-100/80 print:text-slate-500">Estimated Total</p>
+                <p className="mt-2 text-lg font-semibold text-emerald-100 print:text-black">
+                  {formatINR(proposalData.proposal.totalEstimatedCost || 0)}
                 </p>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-white/10">
-              <table className="min-w-full divide-y divide-white/10 text-left">
-                <thead className="bg-slate-900/90">
-                  <tr className="text-xs uppercase tracking-[0.18em] text-slate-400">
+            <div className="overflow-hidden rounded-3xl border border-white/10 print:rounded-none print:border-slate-300">
+              <table className="min-w-full divide-y divide-white/10 text-left print:divide-slate-300">
+                <thead className="bg-slate-900/90 print:bg-white">
+                  <tr className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-600">
                     <th className="px-5 py-4">Product</th>
                     <th className="px-5 py-4">Quantity</th>
                     <th className="px-5 py-4">Unit Cost</th>
                     <th className="px-5 py-4">Line Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/8 bg-slate-950/40">
+                <tbody className="divide-y divide-white/8 bg-slate-950/40 print:divide-slate-200 print:bg-white">
                   {(proposalData.proposal.productsMix || []).map((item) => (
-                    <tr key={`${item.productName}-${item.suggestedQuantity}`} className="text-slate-200">
-                      <td className="px-5 py-4 font-medium text-white">{item.productName}</td>
+                    <tr
+                      key={`${item.productName}-${item.suggestedQuantity}`}
+                      className="text-slate-200 print:text-black"
+                    >
+                      <td className="px-5 py-4 font-medium text-white print:text-black">{item.productName}</td>
                       <td className="px-5 py-4">{item.suggestedQuantity}</td>
-                      <td className="px-5 py-4">${Number(item.unitCost || 0).toFixed(2)}</td>
-                      <td className="px-5 py-4">${Number(item.totalLineCost || 0).toFixed(2)}</td>
+                      <td className="px-5 py-4">{formatINR(item.unitCost || 0)}</td>
+                      <td className="px-5 py-4">{formatINR(item.totalLineCost || 0)}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <div className="rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/8 p-5">
-              <p className="text-xs uppercase tracking-[0.18em] text-fuchsia-200/80">Impact Positioning</p>
-              <p className="mt-3 text-base leading-8 text-slate-100">
+            <div className="rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/8 p-5 print:border-slate-300 print:bg-white">
+              <p className="text-xs uppercase tracking-[0.18em] text-fuchsia-200/80 print:text-slate-500">Impact Positioning</p>
+              <p className="mt-3 text-base leading-8 text-slate-100 print:text-black">
                 {proposalData.proposal.impactPositioningSummary}
               </p>
             </div>

@@ -41,7 +41,7 @@ function AdminLayout() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_30%),linear-gradient(180deg,_#0f172a_0%,_#111827_45%,_#020617_100%)] text-slate-100">
       <div className="flex min-h-screen">
-        <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-slate-950/60 backdrop-blur xl:flex xl:flex-col">
+        <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-slate-950/60 backdrop-blur print:hidden xl:flex xl:flex-col">
           <div className="border-b border-white/10 px-6 py-6">
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-400/15 text-cyan-300">
@@ -89,7 +89,7 @@ function AdminLayout() {
         </aside>
 
         <div className="flex min-h-screen flex-1 flex-col">
-          <header className="border-b border-white/10 bg-slate-950/35 backdrop-blur">
+          <header className="border-b border-white/10 bg-slate-950/35 backdrop-blur print:hidden">
             <div className="flex items-center justify-between gap-4 px-6 py-5 lg:px-10">
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Sustainable Commerce SaaS</p>
@@ -101,7 +101,7 @@ function AdminLayout() {
             </div>
           </header>
 
-          <main className="flex-1 px-6 py-8 lg:px-10">
+          <main className="flex-1 px-6 py-8 print:px-0 print:py-0 lg:px-10">
             <Outlet />
           </main>
         </div>
