@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const productRoutes = require("./routes/product.routes");
+const proposalRoutes = require("./routes/proposal.routes");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use(express.json());
  * as new SaaS modules are added.
  */
 app.use("/api/products", productRoutes);
+app.use("/api/proposals", proposalRoutes);
 
 app.get("/api/health", async (_request, response) => {
   response.json({

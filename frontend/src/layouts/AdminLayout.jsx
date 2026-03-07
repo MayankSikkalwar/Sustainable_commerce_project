@@ -58,7 +58,7 @@ function AdminLayout() {
             <ul className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.to;
+                const isActive = location.pathname === item.to || location.pathname.startsWith(`${item.to}/`);
 
                 return (
                   <li key={item.to}>

@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import ProductOnboardingPage from "./pages/ProductOnboardingPage.jsx";
+import ProposalGeneratorPage from "./pages/ProposalGeneratorPage.jsx";
 
 /**
  * Root application router.
@@ -24,7 +25,7 @@ function App() {
           <Route index element={<Navigate to="/products/new" replace />} />
           <Route path="/dashboard" element={<ProductOnboardingPage />} />
           <Route path="/products/new" element={<ProductOnboardingPage />} />
-          <Route path="/proposals" element={<ProductOnboardingPage />} />
+          <Route path="/proposals" element={<ProposalGeneratorPage />} />
           <Route path="/support" element={<ProductOnboardingPage />} />
         </Route>
       </Routes>
