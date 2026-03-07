@@ -20,6 +20,8 @@ import apiClient from "../api/apiClient";
 function ProductOnboardingPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [cost, setCost] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [enrichedData, setEnrichedData] = useState(null);
@@ -27,8 +29,8 @@ function ProductOnboardingPage() {
   const embeddingExists = Array.isArray(enrichedData?.mlEmbedding) && enrichedData.mlEmbedding.length > 0;
 
   async function handleEnrich() {
-    if (!name.trim() || !description.trim()) {
-      window.alert("Please enter both name and description before running AI enrichment.");
+    if (!name.trim() || !description.trim() || !price || !cost) {
+      window.alert("Please enter name, description, unit price, and unit cost before running AI enrichment.");
       return;
     }
 
@@ -38,6 +40,8 @@ function ProductOnboardingPage() {
       const response = await apiClient.post("/products/enrich", {
         name,
         description,
+        price: Number(price),
+        cost: Number(cost),
       });
 
       setEnrichedData(response);
@@ -60,6 +64,8 @@ function ProductOnboardingPage() {
       await apiClient.post("/products/save", {
         name,
         description,
+        price: Number(price),
+        cost: Number(cost),
         primaryCategory: enrichedData.aiData.primaryCategory,
         subCategory: enrichedData.aiData.subCategory,
         seoTags: enrichedData.aiData.seoTags,
@@ -69,6 +75,8 @@ function ProductOnboardingPage() {
 
       setName("");
       setDescription("");
+      setPrice("");
+      setCost("");
       setEnrichedData(null);
       window.alert("Product saved successfully.");
     } catch (error) {
@@ -127,6 +135,34 @@ function ProductOnboardingPage() {
                 className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
               />
             </label>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block space-y-2">
+                <span className="text-sm font-medium text-slate-200">Unit Price ($)</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={price}
+                  onChange={(event) => setPrice(event.target.value)}
+                  placeholder="24.99"
+                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                />
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm font-medium text-slate-200">Unit Cost ($)</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={cost}
+                  onChange={(event) => setCost(event.target.value)}
+                  placeholder="11.40"
+                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                />
+              </label>
+            </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">

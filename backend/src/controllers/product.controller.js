@@ -108,10 +108,33 @@ async function saveProduct(req, res) {
       cost = 0,
     } = req.body;
 
+    const parsedPrice = Number.parseFloat(price);
+    const parsedCost = Number.parseFloat(cost);
+
     if (!name || !description || !primaryCategory || !subCategory) {
       return res.status(400).json({
         success: false,
         message: "Missing required product fields for saving.",
+      });
+    }
+
+    /**
+     * Price and cost must be stored as real numeric values instead of silently
+     * falling back to zero.
+     *
+     * Why this matters for AI integrity:
+     * - Module 2 asks the LLM to satisfy a budget constraint using catalog cost
+     *   data retrieved from the database.
+     * - If cost and price are missing or coerced to zero unintentionally, the
+     *   model is grounded on false business data and can appear to "hallucinate"
+     *   unrealistic free-item proposals.
+     * - Parsing and validating floats here protects downstream RAG generation by
+     *   ensuring the stored commercial inputs match the admin's intended values.
+     */
+    if (Number.isNaN(parsedPrice) || Number.isNaN(parsedCost)) {
+      return res.status(400).json({
+        success: false,
+        message: "price and cost must be valid numeric values.",
       });
     }
 
@@ -124,8 +147,8 @@ async function saveProduct(req, res) {
         seoTags: Array.isArray(seoTags) ? seoTags : [],
         sustainabilityFilters: Array.isArray(sustainabilityFilters) ? sustainabilityFilters : [],
         embedding: Array.isArray(embedding) ? embedding.map(Number) : [],
-        price: Number(price) || 0,
-        cost: Number(cost) || 0,
+        price: parsedPrice,
+        cost: parsedCost,
       },
     });
 
