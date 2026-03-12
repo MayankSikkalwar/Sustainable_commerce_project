@@ -101,26 +101,26 @@ function ProposalGeneratorPage() {
     <section className="grid gap-8 print:block xl:grid-cols-[0.9fr_1.1fr]">
       <div className="space-y-8 print:hidden">
         <div className="space-y-4">
-          <p className="inline-flex rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-4 py-1 text-xs uppercase tracking-[0.28em] text-fuchsia-200">
+          <p className="inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1 text-xs uppercase tracking-[0.28em] text-emerald-200">
             Module 2
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white">
             Generate budget-aware B2B proposals using vector search and RAG.
           </h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-300">
+          <p className="max-w-3xl text-lg leading-8 text-zinc-400">
             This workflow embeds the client requirement, retrieves the closest product vectors from
             MongoDB, and asks Groq to turn those top matches into a structured eco-commerce quote.
           </p>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 shadow-[0_30px_100px_-40px_rgba(217,70,239,0.45)] backdrop-blur print:hidden">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-6 shadow-[0_25px_80px_-45px_rgba(0,0,0,0.85)] backdrop-blur print:hidden">
           <div className="mb-6 flex items-center gap-3">
-            <div className="rounded-2xl bg-fuchsia-400/12 p-3 text-fuchsia-300">
+            <div className="rounded-2xl border border-sky-500/20 bg-sky-500/10 p-3 text-sky-300">
               <FileStack className="h-5 w-5" />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-white">Proposal Brief</h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-zinc-500">
                 Capture the client context and let the backend assemble a grounded quote.
               </p>
             </div>
@@ -128,37 +128,37 @@ function ProposalGeneratorPage() {
 
           <div className="space-y-5">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Client name</span>
+              <span className="text-sm font-medium text-zinc-200">Client name</span>
               <input
                 value={clientName}
                 onChange={(event) => setClientName(event.target.value)}
                 placeholder="Example: GreenNest Corporate Gifts"
-                className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-fuchsia-300/40 focus:ring-2 focus:ring-fuchsia-400/20"
+                className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
               />
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Client needs</span>
+              <span className="text-sm font-medium text-zinc-200">Client needs</span>
               <textarea
                 value={clientNeeds}
                 onChange={(event) => setClientNeeds(event.target.value)}
                 rows={7}
                 placeholder="Describe the use case, target audience, sustainability goal, and commercial constraints."
-                className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-fuchsia-300/40 focus:ring-2 focus:ring-fuchsia-400/20"
+                className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
               />
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Budget (₹)</span>
+              <span className="text-sm font-medium text-zinc-200">Budget (₹)</span>
               <div className="relative">
-                <BadgeDollarSign className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-fuchsia-300" />
+                <BadgeDollarSign className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
                 <input
                   type="number"
                   min="1"
                   value={budget}
                   onChange={(event) => setBudget(event.target.value)}
                   placeholder="5000"
-                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-12 py-3 text-slate-100 outline-none transition focus:border-fuchsia-300/40 focus:ring-2 focus:ring-fuchsia-400/20"
+                  className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-12 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
                 />
               </div>
             </label>
@@ -169,7 +169,7 @@ function ProposalGeneratorPage() {
               type="button"
               onClick={handleGenerateProposal}
               disabled={isLoading}
-              className="inline-flex items-center gap-2 rounded-2xl bg-fuchsia-400 px-5 py-3 font-medium text-slate-950 transition hover:bg-fuchsia-300 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-5 py-3 font-medium text-white shadow-lg shadow-emerald-500/20 transition hover:from-emerald-400 hover:to-teal-500 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isLoading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               <span>{isLoading ? "Generating..." : "Generate Smart Proposal 🚀"}</span>
@@ -179,7 +179,7 @@ function ProposalGeneratorPage() {
               type="button"
               onClick={handleSaveProposal}
               disabled={isSaving || !proposalData?.proposal}
-              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/25 bg-emerald-400/12 px-5 py-3 font-medium text-emerald-200 transition hover:bg-emerald-400/18 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-2xl border border-zinc-700 bg-zinc-900 px-5 py-3 font-medium text-emerald-200 transition hover:border-emerald-500/30 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSaving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               <span>{isSaving ? "Saving..." : "Save Proposal"}</span>
@@ -189,7 +189,7 @@ function ProposalGeneratorPage() {
               type="button"
               onClick={handleDownloadPdf}
               disabled={!proposalData?.proposal}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/15 bg-white/5 px-5 py-3 font-medium text-slate-100 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-2xl border border-zinc-700 bg-zinc-900 px-5 py-3 font-medium text-zinc-100 transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <FileStack className="h-4 w-4" />
               <span>Download as PDF 📄</span>
@@ -198,24 +198,24 @@ function ProposalGeneratorPage() {
         </div>
 
         {proposalData?.matchedProducts?.length ? (
-          <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur print:hidden">
-            <div className="mb-4 flex items-center gap-2 text-sm font-medium text-slate-200">
-              <BrainCircuit className="h-4 w-4 text-fuchsia-300" />
+          <div className="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-6 backdrop-blur print:hidden">
+            <div className="mb-4 flex items-center gap-2 text-sm font-medium text-zinc-200">
+              <BrainCircuit className="h-4 w-4 text-sky-300" />
               Top Vector Matches
             </div>
             <div className="space-y-3">
               {proposalData.matchedProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="flex items-center justify-between rounded-2xl border border-white/8 bg-slate-900/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950/80 px-4 py-3"
                 >
                   <div>
                     <p className="font-medium text-white">{product.name}</p>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-zinc-500">
                       Cost {formatINR(product.cost)} • Price {formatINR(product.price)}
                     </p>
                   </div>
-                  <span className="rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-3 py-1 text-xs text-fuchsia-100">
+                  <span className="rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 text-xs text-sky-100">
                     similarity {product.similarityScore?.toFixed(3)}
                   </span>
                 </div>
@@ -225,13 +225,13 @@ function ProposalGeneratorPage() {
         ) : null}
       </div>
 
-      <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur print:rounded-none print:border-0 print:bg-white print:p-0 print:text-black print:shadow-none">
+      <div className="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-6 backdrop-blur print:rounded-none print:border-0 print:bg-white print:p-0 print:text-black print:shadow-none">
         <div className="flex flex-wrap items-start justify-between gap-4 print:border-b print:border-slate-300 print:pb-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-fuchsia-200/80 print:text-slate-500">Proposal Output</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 print:text-slate-500">Proposal Output</p>
             <h2 className="mt-2 text-3xl font-semibold text-white print:text-black">Invoice / Quote Preview</h2>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-fuchsia-300/20 bg-fuchsia-400/10 px-4 py-2 text-xs font-medium text-fuchsia-100 print:border-slate-300 print:bg-white print:text-black">
+          <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/10 px-4 py-2 text-xs font-medium text-sky-100 print:border-slate-300 print:bg-white print:text-black">
             <BrainCircuit className="h-3.5 w-3.5" />
             Powered by Vector Search & RAG 🧠
           </span>
@@ -240,15 +240,15 @@ function ProposalGeneratorPage() {
         {proposalData?.proposal ? (
           <div className="mt-8 space-y-8">
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4 print:border-slate-300 print:bg-white">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-500">Client</p>
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4 print:border-slate-300 print:bg-white">
+                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500 print:text-slate-500">Client</p>
                 <p className="mt-2 text-lg font-semibold text-white print:text-black">{clientName}</p>
               </div>
-              <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4 print:border-slate-300 print:bg-white">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-500">Budget</p>
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4 print:border-slate-300 print:bg-white">
+                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500 print:text-slate-500">Budget</p>
                 <p className="mt-2 text-lg font-semibold text-white print:text-black">{formatINR(budget)}</p>
               </div>
-              <div className="rounded-2xl border border-emerald-300/15 bg-emerald-400/10 p-4 print:border-slate-300 print:bg-white">
+              <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 print:border-slate-300 print:bg-white">
                 <p className="text-xs uppercase tracking-[0.18em] text-emerald-100/80 print:text-slate-500">Estimated Total</p>
                 <p className="mt-2 text-lg font-semibold text-emerald-100 print:text-black">
                   {formatINR(proposalData.proposal.totalEstimatedCost || 0)}
@@ -256,21 +256,21 @@ function ProposalGeneratorPage() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-white/10 print:rounded-none print:border-slate-300">
-              <table className="min-w-full divide-y divide-white/10 text-left print:divide-slate-300">
-                <thead className="bg-slate-900/90 print:bg-white">
-                  <tr className="text-xs uppercase tracking-[0.18em] text-slate-400 print:text-slate-600">
+            <div className="overflow-hidden rounded-3xl border border-zinc-800 print:rounded-none print:border-slate-300">
+              <table className="min-w-full divide-y divide-zinc-800 text-left print:divide-slate-300">
+                <thead className="bg-zinc-950 print:bg-white">
+                  <tr className="text-xs uppercase tracking-[0.18em] text-zinc-500 print:text-slate-600">
                     <th className="px-5 py-4">Product</th>
                     <th className="px-5 py-4">Quantity</th>
                     <th className="px-5 py-4">Unit Cost</th>
                     <th className="px-5 py-4">Line Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/8 bg-slate-950/40 print:divide-slate-200 print:bg-white">
+                <tbody className="divide-y divide-zinc-800 bg-zinc-900/40 print:divide-slate-200 print:bg-white">
                   {(proposalData.proposal.productsMix || []).map((item) => (
                     <tr
                       key={`${item.productName}-${item.suggestedQuantity}`}
-                      className="text-slate-200 print:text-black"
+                      className="text-zinc-200 print:text-black"
                     >
                       <td className="px-5 py-4 font-medium text-white print:text-black">{item.productName}</td>
                       <td className="px-5 py-4">{item.suggestedQuantity}</td>
@@ -282,15 +282,15 @@ function ProposalGeneratorPage() {
               </table>
             </div>
 
-            <div className="rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/8 p-5 print:border-slate-300 print:bg-white">
-              <p className="text-xs uppercase tracking-[0.18em] text-fuchsia-200/80 print:text-slate-500">Impact Positioning</p>
-              <p className="mt-3 text-base leading-8 text-slate-100 print:text-black">
+            <div className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-5 print:border-slate-300 print:bg-white">
+              <p className="text-xs uppercase tracking-[0.18em] text-zinc-500 print:text-slate-500">Impact Positioning</p>
+              <p className="mt-3 text-base leading-8 text-zinc-100 print:text-black">
                 {proposalData.proposal.impactPositioningSummary}
               </p>
             </div>
           </div>
         ) : (
-          <div className="mt-8 rounded-3xl border border-dashed border-white/10 bg-slate-900/40 p-10 text-center text-slate-400">
+          <div className="mt-8 rounded-3xl border border-dashed border-zinc-800 bg-zinc-950/70 p-10 text-center text-zinc-500">
             Generate a proposal to see the quote table, impact summary, and retrieved product mix.
           </div>
         )}

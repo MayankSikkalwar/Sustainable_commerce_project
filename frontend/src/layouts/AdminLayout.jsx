@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { ClipboardPlus, Headset, LayoutDashboard, Sparkles, Store } from "lucide-react";
+import { Bell, CircleUserRound, ClipboardPlus, Headset, LayoutDashboard, Sparkles, Store } from "lucide-react";
 
 const navigationItems = [
   {
@@ -39,16 +39,16 @@ function AdminLayout() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_30%),linear-gradient(180deg,_#0f172a_0%,_#111827_45%,_#020617_100%)] text-slate-100">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),_transparent_28%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.08),_transparent_22%),linear-gradient(180deg,_#09090b_0%,_#0a0a0a_100%)] text-zinc-100">
       <div className="flex min-h-screen">
-        <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-slate-950/60 backdrop-blur print:hidden xl:flex xl:flex-col">
-          <div className="border-b border-white/10 px-6 py-6">
+        <aside className="hidden w-72 shrink-0 border-r border-zinc-800 bg-zinc-900/95 backdrop-blur print:hidden xl:flex xl:flex-col">
+          <div className="border-b border-zinc-800 px-6 py-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-400/15 text-cyan-300">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-300">
                 <Store className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Admin Portal</p>
+                <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">Admin Portal</p>
                 <h1 className="text-lg font-semibold text-white">Rayeva AI Systems</h1>
               </div>
             </div>
@@ -64,13 +64,13 @@ function AdminLayout() {
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm transition ${
+                      className={`flex items-center gap-3 rounded-r-2xl border-l-2 px-4 py-3 text-sm transition ${
                         isActive
-                          ? "bg-cyan-400/15 text-white shadow-[0_18px_50px_-28px_rgba(34,211,238,0.85)]"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          ? "border-emerald-500 bg-gradient-to-r from-emerald-500/10 to-transparent text-white"
+                          : "border-transparent text-zinc-400 hover:bg-zinc-800/70 hover:text-white"
                       }`}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className={`h-4 w-4 ${isActive ? "text-emerald-300" : "text-zinc-500"}`} />
                       <span>{item.label}</span>
                     </Link>
                   </li>
@@ -78,25 +78,32 @@ function AdminLayout() {
               })}
             </ul>
           </nav>
-
-          <div className="m-4 rounded-3xl border border-cyan-300/15 bg-cyan-400/8 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">Phase Focus</p>
-            <p className="mt-2 text-sm leading-6 text-slate-200">
-              Product enrichment, vector search, and proposal generation will plug
-              into this shell as separate workflow pages.
-            </p>
-          </div>
         </aside>
 
         <div className="flex min-h-screen flex-1 flex-col">
-          <header className="border-b border-white/10 bg-slate-950/35 backdrop-blur print:hidden">
+          <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur print:hidden">
             <div className="flex items-center justify-between gap-4 px-6 py-5 lg:px-10">
               <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Sustainable Commerce SaaS</p>
+                <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">Sustainable Commerce SaaS</p>
                 <h2 className="text-2xl font-semibold text-white">Operations Console</h2>
               </div>
-              <div className="rounded-2xl border border-emerald-300/20 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-200">
-                Backend API: {`http://localhost:5000/api`}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 text-zinc-300 transition hover:border-emerald-500/30 hover:text-white"
+                  aria-label="Notifications"
+                >
+                  <Bell className="h-5 w-5" />
+                </button>
+                <div className="flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900 py-2 pl-2 pr-4">
+                  <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-emerald-500/20 bg-gradient-to-br from-emerald-500/20 to-teal-500/10 text-emerald-200">
+                    <CircleUserRound className="h-5 w-5" />
+                  </div>
+                  <div className="hidden sm:block">
+                    <p className="text-sm font-medium text-white">Admin</p>
+                    <p className="text-xs text-zinc-500">Workspace Owner</p>
+                  </div>
+                </div>
               </div>
             </div>
           </header>

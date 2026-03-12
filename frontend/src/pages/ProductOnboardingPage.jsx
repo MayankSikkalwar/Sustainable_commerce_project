@@ -90,55 +90,55 @@ function ProductOnboardingPage() {
     <section className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
       <div className="space-y-8">
         <div className="space-y-4">
-          <p className="inline-flex rounded-full border border-cyan-300/20 bg-cyan-400/10 px-4 py-1 text-xs uppercase tracking-[0.28em] text-cyan-200">
+          <p className="inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1 text-xs uppercase tracking-[0.28em] text-emerald-200">
             Module 1
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white">
             Auto-categorize products, generate SEO tags, and create ML vectors in one workflow.
           </h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-300">
+          <p className="max-w-3xl text-lg leading-8 text-zinc-400">
             This screen sends a product draft to Groq for structured catalog suggestions and to
             Hugging Face for vector embedding generation, then lets the admin review and persist
             the result to MongoDB.
           </p>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 shadow-[0_30px_100px_-40px_rgba(34,211,238,0.45)] backdrop-blur">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-6 shadow-[0_25px_80px_-45px_rgba(0,0,0,0.85)] backdrop-blur">
           <div className="mb-6 flex items-center gap-3">
-            <div className="rounded-2xl bg-cyan-400/12 p-3 text-cyan-300">
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-300">
               <Boxes className="h-5 w-5" />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-white">Product Draft</h2>
-              <p className="text-sm text-slate-400">Describe the item and let the AI prepare catalog metadata.</p>
+              <p className="text-sm text-zinc-500">Describe the item and let the AI prepare catalog metadata.</p>
             </div>
           </div>
 
           <div className="space-y-5">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Product name</span>
+              <span className="text-sm font-medium text-zinc-200">Product name</span>
               <input
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Example: OceanLoop Stainless Steel Straw Set"
-                className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
               />
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-200">Description</span>
+              <span className="text-sm font-medium text-zinc-200">Description</span>
               <textarea
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 rows={7}
                 placeholder="Describe the material, use case, sustainability angle, and target buyer."
-                className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
               />
             </label>
 
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block space-y-2">
-                <span className="text-sm font-medium text-slate-200">Unit Price (₹)</span>
+                <span className="text-sm font-medium text-zinc-200">Unit Price (₹)</span>
                 <input
                   type="number"
                   min="0"
@@ -146,12 +146,12 @@ function ProductOnboardingPage() {
                   value={price}
                   onChange={(event) => setPrice(event.target.value)}
                   placeholder="24.99"
-                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                  className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
                 />
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm font-medium text-slate-200">Unit Cost (₹)</span>
+                <span className="text-sm font-medium text-zinc-200">Unit Cost (₹)</span>
                 <input
                   type="number"
                   min="0"
@@ -159,7 +159,7 @@ function ProductOnboardingPage() {
                   value={cost}
                   onChange={(event) => setCost(event.target.value)}
                   placeholder="11.40"
-                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-400/20"
+                  className="w-full rounded-2xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/60 focus:ring-2 focus:ring-emerald-500/30"
                 />
               </label>
             </div>
@@ -170,7 +170,7 @@ function ProductOnboardingPage() {
               type="button"
               onClick={handleEnrich}
               disabled={isLoading}
-              className="inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 font-medium text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-5 py-3 font-medium text-white shadow-lg shadow-emerald-500/20 transition hover:from-emerald-400 hover:to-teal-500 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isLoading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               <span>{isLoading ? "Generating..." : "Enrich with AI ✨"}</span>
@@ -180,7 +180,7 @@ function ProductOnboardingPage() {
               type="button"
               onClick={handleSave}
               disabled={isSaving || !enrichedData?.aiData}
-              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/25 bg-emerald-400/12 px-5 py-3 font-medium text-emerald-200 transition hover:bg-emerald-400/18 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-2xl border border-zinc-700 bg-zinc-900 px-5 py-3 font-medium text-emerald-200 transition hover:border-emerald-500/30 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSaving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               <span>{isSaving ? "Saving..." : "Save to Database"}</span>
@@ -190,14 +190,14 @@ function ProductOnboardingPage() {
       </div>
 
       <aside className="space-y-5">
-        <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 backdrop-blur">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-900/90 p-6 backdrop-blur">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">AI Suggestions</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">AI Suggestions</p>
               <h2 className="mt-2 text-2xl font-semibold text-white">Enrichment Review</h2>
             </div>
             {embeddingExists ? (
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-300/25 bg-emerald-400/12 px-3 py-1 text-xs font-medium text-emerald-200">
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-200">
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 Hugging Face ML Vector Generated ✅
               </span>
@@ -207,14 +207,14 @@ function ProductOnboardingPage() {
           {enrichedData?.aiData ? (
             <div className="mt-6 space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Primary Category</p>
+                <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">Primary Category</p>
                   <p className="mt-2 text-lg font-semibold text-white">
                     {enrichedData.aiData.primaryCategory}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/8 bg-slate-900/70 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Sub-category</p>
+                <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">Sub-category</p>
                   <p className="mt-2 text-lg font-semibold text-white">
                     {enrichedData.aiData.subCategory}
                   </p>
@@ -222,15 +222,15 @@ function ProductOnboardingPage() {
               </div>
 
               <div>
-                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-slate-200">
-                  <Tag className="h-4 w-4 text-cyan-300" />
+                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-zinc-200">
+                  <Tag className="h-4 w-4 text-sky-300" />
                   SEO Tags
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {enrichedData.aiData.seoTags?.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-sm text-cyan-100"
+                      className="rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 text-sm text-sky-100"
                     >
                       {tag}
                     </span>
@@ -239,7 +239,7 @@ function ProductOnboardingPage() {
               </div>
 
               <div>
-                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-slate-200">
+                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-zinc-200">
                   <Leaf className="h-4 w-4 text-emerald-300" />
                   Sustainability Filters
                 </div>
@@ -247,7 +247,7 @@ function ProductOnboardingPage() {
                   {enrichedData.aiData.sustainabilityFilters?.map((filter) => (
                     <span
                       key={filter}
-                      className="rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-sm text-emerald-100"
+                      className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-100"
                     >
                       {filter}
                     </span>
@@ -256,7 +256,7 @@ function ProductOnboardingPage() {
               </div>
             </div>
           ) : (
-            <div className="mt-6 rounded-3xl border border-dashed border-white/10 bg-slate-900/40 p-8 text-center text-slate-400">
+            <div className="mt-6 rounded-3xl border border-dashed border-zinc-800 bg-zinc-950/70 p-8 text-center text-zinc-500">
               Run AI enrichment to preview category suggestions, SEO tags, sustainability filters, and the ML vector status.
             </div>
           )}
