@@ -61,14 +61,14 @@ function DashboardPage() {
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.03),transparent_38%)]" />
               <div className="flex items-start justify-between gap-4">
                 <div className="relative z-10">
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">{stat.label}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">{stat.label}</p>
                   <p className="mt-4 text-3xl font-semibold text-white">{stat.value}</p>
                 </div>
                 <div className={`relative z-10 rounded-2xl border p-3 shadow-lg ${stat.accent}`}>
                   <Icon className="h-5 w-5" />
                 </div>
               </div>
-              <p className="relative z-10 mt-6 text-sm leading-6 text-zinc-400">{stat.detail}</p>
+              <p className="relative z-10 mt-6 text-sm leading-6 text-zinc-300">{stat.detail}</p>
             </article>
           );
         })}

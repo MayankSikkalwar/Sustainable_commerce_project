@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { Bell, CircleUserRound, ClipboardPlus, Headset, LayoutDashboard, Sparkles, Store } from "lucide-react";
+import { CircleUserRound, ClipboardPlus, Headset, LayoutDashboard, Sparkles, Store } from "lucide-react";
 
 const navigationItems = [
   {
@@ -87,22 +87,13 @@ function AdminLayout() {
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">Sustainable Commerce SaaS</p>
                 <h2 className="text-2xl font-semibold text-white">Operations Console</h2>
               </div>
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 text-zinc-300 transition hover:border-emerald-500/30 hover:text-white"
-                  aria-label="Notifications"
-                >
-                  <Bell className="h-5 w-5" />
-                </button>
-                <div className="flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900 py-2 pl-2 pr-4">
-                  <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-emerald-500/20 bg-gradient-to-br from-emerald-500/20 to-teal-500/10 text-emerald-200">
-                    <CircleUserRound className="h-5 w-5" />
-                  </div>
-                  <div className="hidden sm:block">
-                    <p className="text-sm font-medium text-white">Admin</p>
-                    <p className="text-xs text-zinc-500">Workspace Owner</p>
-                  </div>
+              <div className="flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900 py-2 pl-2 pr-4">
+                <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-emerald-500/20 bg-gradient-to-br from-emerald-500/20 to-teal-500/10 text-emerald-200">
+                  <CircleUserRound className="h-5 w-5" />
+                </div>
+                <div className="hidden sm:block">
+                  <p className="text-sm font-medium text-white">Admin</p>
+                  <p className="text-xs text-zinc-500">Workspace Owner</p>
                 </div>
               </div>
             </div>
