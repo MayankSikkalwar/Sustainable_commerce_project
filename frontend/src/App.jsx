@@ -1,8 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import AdminLayout from "./layouts/AdminLayout.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
 import ProductOnboardingPage from "./pages/ProductOnboardingPage.jsx";
 import ProposalGeneratorPage from "./pages/ProposalGeneratorPage.jsx";
+import SupportPage from "./pages/SupportPage.jsx";
 
 /**
  * Root application router.
@@ -22,11 +24,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AdminLayout />}>
-          <Route index element={<Navigate to="/products/new" replace />} />
-          <Route path="/dashboard" element={<ProductOnboardingPage />} />
+          <Route index element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/products/new" element={<ProductOnboardingPage />} />
           <Route path="/proposals" element={<ProposalGeneratorPage />} />
-          <Route path="/support" element={<ProductOnboardingPage />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
